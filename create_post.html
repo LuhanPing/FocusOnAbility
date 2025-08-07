@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FOA Creator Forum</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      background-color: #6200ea;
+      color: white;
+      padding: 5px 5px;
+      position: relative;
+    }
+
+    .header-flex {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header-text {
+      max-width: 600px;
+    }
+
+    .header-text h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .header-text p {
+      margin: 10px 0 0;
+      font-size: 1rem;
+    }
+
+    .header-img {
+      max-width: 600px;
+      width: 300%;
+      margin-top: 10px;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .home-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #ffffff22;
+      color: white;
+      border: 1px solid #fff;
+      padding: 6px 12px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    .new-post-button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #ff4081;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      width: 180px;
+    }
+
+    .forum-container {
+      max-width: 900px;
+      margin: 30px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .post-preview {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      transition: 0.2s;
+      cursor: pointer;
+    }
+
+    .post-preview:hover {
+      box-shadow: 0 0 20px rgba(0,0,0,0.15);
+    }
+
+    .post-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #6200ea;
+      margin-bottom: 10px;
+    }
+
+    .post-snippet {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .post-meta {
+      font-size: 0.8rem;
+      color: #999;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .post-stats {
+      font-size: 0.85rem;
+      color: #777;
+    }
+
+    @media (max-width: 768px) {
+      .header-flex {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .header-img {
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="home-button" href="index.html">Home</a>
+    <div class="header-flex">
+      <div class="header-text">
+        <h1>🎬 FOA Creator Forum</h1>
+        <p>Explore and share your thoughts, ideas, and inspirations for the Focus on Ability festival!</p>
+      </div>
+      <img class="header-img" src="prize.png" alt="Promotion Prize">
+    </div>
+  </header>
+
+  <a class="new-post-button" href="write_post.html">✍️ Write New Post</a>
+
+  <div class="forum-container" id="forum-posts">
+    <!-- JavaScript will populate posts here -->
+  </div>
+
+  <script>
+    const forumPosts = JSON.parse(localStorage.getItem('foaPosts') || '[]');
+
+    const container = document.getElementById('forum-posts');
+    if (forumPosts.length === 0) {
+      container.innerHTML = '<p style="text-align:center; color: #777">No posts yet. Be the first to share!</p>';
+    } else {
+      forumPosts.forEach((post, index) => {
+        const views = parseInt(localStorage.getItem(`views_${index}`) || '0');
+        const likes = parseInt(localStorage.getItem(`likes_${index}`) || '0');
+        const comments = JSON.parse(localStorage.getItem(`comments_${index}`) || '[]').length;
+
+        const postEl = document.createElement('div');
+        postEl.className = 'post-preview';
+        postEl.onclick = () => {
+          localStorage.setItem(`views_${index}`, views + 1);
+          window.location.href = `post.html?id=${index}`;
+        };
+        postEl.innerHTML = `
+          <div class="post-title">${post.title}</div>
+          <div class="post-snippet">${post.content.slice(0, 100)}${post.content.length > 100 ? '...' : ''}</div>
+          <div class="post-meta">
+            <span>${new Date(post.date).toLocaleString()} | ${post.author || 'Anonymous'}</span>
+            <span class="post-stats">👀 ${views} &nbsp; 👍 ${likes} &nbsp; 💬 ${comments}</span>
+          </div>
+        `;
+        container.appendChild(postEl);
+      });
+    }
+  </script>
+</body>
+</html>

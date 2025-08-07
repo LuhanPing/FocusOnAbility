@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Write New Post</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 700px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #6200ea;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    input[type="file"] {
+      margin-top: 5px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #ff4081;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e73370;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>✍️ Write Your Post</h2>
+    <form id="postForm">
+      <label for="author">Your Nickname</label>
+      <input type="text" id="author" name="author" placeholder="e.g. Luhan ✨" required />
+
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" required />
+
+      <label for="content">Content</label>
+      <textarea id="content" name="content" rows="8" required></textarea>
+
+      <label for="media">Attach Image/Video (optional)</label>
+      <input type="file" id="media" name="media" />
+
+      <button type="submit">Submit Post</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('postForm');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const title = form.title.value.trim();
+      const content = form.content.value.trim();
+      const author = form.author.value.trim();
+      const file = form.media.files[0];
+
+      const post = {
+        title,
+        content,
+        author,
+        date: new Date().toISOString(),
+        mediaURL: ''
+      };
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          post.mediaURL = e.target.result;
+          savePost(post);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        savePost(post);
+      }
+    });
+
+    function savePost(post) {
+      const posts = JSON.parse(localStorage.getItem('foaPosts') || '[]');
+      posts.unshift(post);
+      localStorage.setItem('foaPosts', JSON.stringify(posts));
+      window.location.href = 'create_post.html';
+    }
+  </script>
+</body>
+</html>

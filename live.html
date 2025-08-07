@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FOA Livestream Room</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0c0c0c;
+      color: #e0f7fa;
+      overflow: hidden;
+    }
+    h1 {
+      text-align: center;
+      padding: 20px;
+      color: #00e5ff;
+      font-size: 2rem;
+    }
+    .main {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+    .video-container {
+      flex: 3;
+      position: relative;
+      background-color: black;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    video {
+      width: 90%;
+      max-height: 80%;
+    }
+    .danmu {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 80%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 2;
+    }
+    .danmu span {
+      position: absolute;
+      white-space: nowrap;
+      font-size: 1.2rem;
+      color: #00e5ff;
+      text-shadow: 0 0 4px #00e5ff;
+      animation: danmuMove 10s linear forwards;
+    }
+    @keyframes danmuMove {
+      0% { left: 100%; }
+      100% { left: -100%; }
+    }
+    .danmu-input {
+      width: 90%;
+      margin-top: 10px;
+      display: flex;
+    }
+    .danmu-input input {
+      flex: 1;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: none;
+    }
+    .danmu-input button {
+      padding: 10px 15px;
+      margin-left: 8px;
+      font-size: 1rem;
+      background-color: #00e5ff;
+      color: black;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .chat {
+      flex: 1;
+      background-color: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      justify-content: flex-start;
+    }
+    .chat h2 {
+      font-size: 1.2rem;
+      color: #00ff90;
+      margin-bottom: 10px;
+    }
+    .messages {
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+    .message {
+      background: #333;
+      padding: 8px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+    .chat-input {
+      display: flex;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: none;
+    }
+    .chat-input button {
+      padding: 10px 15px;
+      margin-left: 8px;
+      font-size: 1rem;
+      background-color: #00e5ff;
+      color: black;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Past Awarded Short Films – LiveStream Room</h1>
+  <div class="main">
+    <div class="video-container">
+      <video id="livestream" autoplay loop playsinline>
+        <source src="livestream_video.mp4" type="video/mp4" />
+      </video>
+      <div class="danmu" id="danmu-layer"></div>
+      <div class="danmu-input">
+        <input type="text" id="danmuInput" placeholder="Send a danmu comment or emoji...">
+        <button onclick="sendDanmu()">Send</button>
+      </div>
+    </div>
+    <div class="chat">
+      <h2>🔴 Live Chat</h2>
+      <div>👥 Online: 127</div>
+      <div class="messages" id="chatbox">
+        <div class="message">🎮 Alice: This one was the winner in 2017!</div>
+        <div class="message">🎥 Bob: So inspiring!!</div>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="msgInput" placeholder="Chat here...">
+        <button onclick="sendChat()">Send</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    const video = document.getElementById('livestream');
+    video.volume = 1.0;
+    video.addEventListener('loadedmetadata', function () {
+      const randomStart = Math.floor(Math.random() * video.duration);
+      video.currentTime = randomStart;
+      video.play();
+    });
+
+    const danmuLayer = document.getElementById('danmu-layer');
+    const danmuMessages = [
+      "You're amazing! 💖",
+      "Love this story!",
+      "👏👏👏",
+      "Such talent!",
+      "Inspiring! ✨",
+      "Never give up!",
+      "True ability shines!",
+      "Tears in my eyes 😢",
+      "We need more films like this!",
+      "🔥🔥🔥"
+    ];
+
+    function launchDanmu(text) {
+      const span = document.createElement('span');
+      span.textContent = text;
+      span.style.top = Math.floor(Math.random() * 80) + '%';
+      danmuLayer.appendChild(span);
+      setTimeout(() => span.remove(), 10000);
+    }
+
+    setInterval(() => {
+      const msg = danmuMessages[Math.floor(Math.random() * danmuMessages.length)];
+      launchDanmu(msg);
+    }, 3000);
+
+    function sendDanmu() {
+      const input = document.getElementById('danmuInput');
+      const text = input.value.trim();
+      if (text !== '') {
+        launchDanmu(text);
+        input.value = '';
+      }
+    }
+
+    function sendChat() {
+      const input = document.getElementById('msgInput');
+      const text = input.value.trim();
+      if (text !== '') {
+        const chatbox = document.getElementById('chatbox');
+        const div = document.createElement('div');
+        div.className = 'message';
+        div.textContent = `🧑‍🏫 You: ${text}`;
+        chatbox.appendChild(div);
+        chatbox.scrollTop = chatbox.scrollHeight;
+        input.value = '';
+      }
+    }
+
+    document.getElementById('danmuInput').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+                sendDanmu();
+        }
+     });
+
+    document.getElementById('msgInput').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+                sendChat();
+        }
+    });
+  </script>
+</body>
+</html>

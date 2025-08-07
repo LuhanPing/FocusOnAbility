@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Focus on Abilities: High-Tech Expo</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0a0f24; 
+      color: white;
+    }
+
+    header.hero {
+      height: 100vh;
+      background: url('abilities2.jpeg') no-repeat center center / cover;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 10px;
+      image-rendering: auto; 
+    }
+
+    header.hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.8); 
+      z-index: 0;
+    }
+
+    .glass-carousel {
+      position: absolute;
+      top: 10%;
+      left: 35%;
+      width: 350px;
+      height: 200px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      backdrop-filter: blur(8px);
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      z-index: 1;
+    }
+
+    .glass-carousel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      animation: fade 10s infinite;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      animation: float 3s ease-in-out infinite;
+      z-index: 1;
+      position: relative;
+    }
+
+    .hero .cta-buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      z-index: 1;
+      position: relative;
+    }
+
+    .hero .cta-buttons a {
+      background-color: #ff4081;
+      padding: 12px 20px;
+      border-radius: 6px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .hero .cta-buttons a:hover {
+      background-color: #e73370;
+    }
+
+    @keyframes fade {
+      0%   {opacity: 1;}
+      50%  {opacity: 0;}
+      100% {opacity: 1;}
+    }
+
+    @keyframes float {
+      0%   {transform: translateY(0);}
+      50%  {transform: translateY(-10px);}
+      100% {transform: translateY(0);}
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      color: #ffcc00;
+      margin-bottom: 20px;
+    }
+
+    .image-placeholder {
+      width: 100%;
+      height: 100px;
+      background-color: #222;
+      border: 2px dashed #555;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      padding: 40px 20px;
+      text-align: center;
+      background: #111;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="glass-carousel">
+      <img src="abilities1.jpeg" alt="expo photo 1" />
+      <img src="abilities3.jpeg" alt="expo photo 3" />
+      <img src="abilities4.jpeg" alt="expo photo 4" />
+    </div>
+    <div>
+      <h1>Tech for All: The Future of Accessibility</h1>
+      <div class="cta-buttons">
+        <a href="#highlights">Explore Innovations</a>
+        <a href="#register">Register Now</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="highlights">
+    <div class="section-title">Expo Highlights</div>
+    <div style="background-color: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; line-height: 1.6;">
+  <p>
+    The <strong>Focus on Abilities: High-Tech Expo</strong> celebrates innovation that empowers individuals with disabilities. 
+    This immersive exhibition brings together cutting-edge technologies—from AI-driven mobility devices to brain-computer interfaces—
+    all designed to enhance independence, communication, and inclusion. Through interactive demos, live showcases, and expert panels,
+    we highlight how technology is not just changing lives, but amplifying human potential.
+  </p>
+  <p>
+    Join us in redefining what's possible when accessibility meets innovation.
+  </p>
+</div>
+
+  </section>
+
+  <section id="partners">
+    <div class="section-title">Tech Partners</div>
+    <div style="text-align: center;">
+      <img src="赞助.png" alt="Sponsors" style="max-width: 65%; height: auto;">
+    </div>
+  </section>
+
+  <section id="experience">
+  <div class="section-title">How to communicate the excellence and influence of the film festival?</div>
+  <div style="background-color: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; line-height: 1.6;">
+    <p>
+      The Focus on Abilities: High-Tech Expo offers a powerful platform to highlight the film festival’s excellence by immersing audiences in real-world assistive innovations. Through interactive exhibits, live demonstrations, and storytelling technology, the festival's core message—empowerment through visibility—is brought to life in tangible ways.
+    </p>
+    <p>
+      By showcasing technologies used by and for people with disabilities—such as AI-powered mobility aids and eye-tracking communication devices—we not only celebrate human potential but also reinforce the impact of inclusive filmmaking. The expo creates opportunities for meaningful dialogue between creators, innovators, and audiences, amplifying the cultural and social influence of the festival far beyond the screen.
+    </p>
+  </div>
+</section>
+
+  <section id="schedule">
+        <a href="index.html" style="
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #ff4081;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  z-index: 999;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  transition: 0.3s;
+">Home</a>
+
+    <div class="section-title">Keynotes & Schedule</div>
+    <div style="background-color: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px;">
+  <h3 style="color:#ffcc00;">📅 Day 1 - Innovation & Interaction</h3>
+  <ul style="line-height: 1.8;">
+    <li><strong>10:00 AM</strong> – Opening Ceremony & Welcome Speech</li>
+    <li><strong>11:00 AM</strong> – Keynote: <em>“The Future of Assistive Tech”</em> by Microsoft Accessibility Lead</li>
+    <li><strong>12:30 PM</strong> – Lunch & Networking</li>
+    <li><strong>2:00 PM</strong> – Interactive Demos: Eye-tracking, Smart Gloves & More</li>
+    <li><strong>4:00 PM</strong> – Short Film Showcase: <em>“Inclusion Through Vision”</em> (from Focus on Ability Film Festival)</li>
+    <li><strong>5:30 PM</strong> – Panel: <em>“Representation in Media & Tech”</em></li>
+  </ul>
+
+  <h3 style="color:#ffcc00; margin-top: 40px;">📅 Day 2 - Empowerment Through Storytelling</h3>
+  <ul style="line-height: 1.8;">
+    <li><strong>10:00 AM</strong> – Workshop: <em>“Create Your First Accessible App”</em></li>
+    <li><strong>11:30 AM</strong> – Keynote: <em>“Tech x Art: How Films Inspire Innovation”</em> by Focus on Ability Festival Director</li>
+    <li><strong>1:00 PM</strong> – Film Screening: <em>“Unheard Voices”</em> + Q&A with creators</li>
+    <li><strong>3:00 PM</strong> – Fireside Chat: <em>“Youth, Disabilities & Digital Storytelling”</em></li>
+    <li><strong>4:30 PM</strong> – Closing Celebration + Awards for Most Engaging Exhibit & Best Comment</li>
+  </ul>
+
+  <p style="margin-top: 30px;">✨ Throughout the event, attendees can visit the <strong>Focus on Ability booth</strong> to explore past award-winning films and share their own stories of overcoming challenges through innovation.</p>
+</div>
+
+  </section>
+
+  <section id="try">
+  <div class="section-title">What high-tech innovation would you like to see? Leave your comment!</div>
+  <div style="margin-bottom: 20px;">
+    <textarea id="userComment" placeholder="Share your thoughts..." rows="4" style="width:100%; padding:10px; border-radius:6px; border:none; resize:vertical;"></textarea>
+    <button onclick="submitComment()" style="margin-top:10px; padding:10px 20px; border:none; background-color:#ff4081; color:white; border-radius:6px; cursor:pointer;">Submit Comment</button>
+  </div>
+  <div id="commentList" style="background-color: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px;">
+    <h4 style="margin-top: 0;">Visitor Comments:</h4>
+    <ul id="commentsUl" style="list-style: none; padding-left: 0;"></ul>
+  </div>
+</section>
+
+<script>
+  function submitComment() {
+    const textarea = document.getElementById('userComment');
+    const comment = textarea.value.trim();
+    if (comment) {
+      const ul = document.getElementById('commentsUl');
+      const li = document.createElement('li');
+      li.textContent = comment;
+      li.style.padding = '8px 0';
+      li.style.borderBottom = '1px dashed #666';
+      ul.appendChild(li);
+      textarea.value = '';
+    }
+  }
+</script>
+
+  <footer>
+    <div style="color:#ffcc00; font-weight:bold;">Made By Luhan Wang</div>
+    <div style="margin-top:10px;">[z5518191]</div>
+    <div style="margin-top:20px; white-space:nowrap; overflow:auto;">
+      [MARK2051 Final Presentation]
+    </div>
+  </footer>
+
+</body>
+</html>
