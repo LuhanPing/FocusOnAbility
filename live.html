@@ -31,9 +31,9 @@
       justify-content: center;
       align-items: center;
     }
-    video {
+    .video-container iframe {
       width: 90%;
-      max-height: 80%;
+      height: 80%;
     }
     .danmu {
       position: absolute;
@@ -57,19 +57,19 @@
       0% { left: 100%; }
       100% { left: -100%; }
     }
-    .danmu-input {
+    .danmu-input, .chat-input {
       width: 90%;
       margin-top: 10px;
       display: flex;
     }
-    .danmu-input input {
+    .danmu-input input, .chat-input input {
       flex: 1;
       padding: 10px;
       font-size: 1rem;
       border-radius: 6px;
       border: none;
     }
-    .danmu-input button {
+    .danmu-input button, .chat-input button {
       padding: 10px 15px;
       margin-left: 8px;
       font-size: 1rem;
@@ -104,35 +104,19 @@
       margin-bottom: 8px;
       font-size: 0.9rem;
     }
-    .chat-input {
-      display: flex;
-    }
-    .chat-input input {
-      flex: 1;
-      padding: 10px;
-      font-size: 1rem;
-      border-radius: 6px;
-      border: none;
-    }
-    .chat-input button {
-      padding: 10px 15px;
-      margin-left: 8px;
-      font-size: 1rem;
-      background-color: #00e5ff;
-      color: black;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
   </style>
 </head>
 <body>
   <h1>Past Awarded Short Films – LiveStream Room</h1>
   <div class="main">
     <div class="video-container">
-      <video id="livestream" autoplay loop playsinline>
-        <source src="livestream_video.mp4" type="video/mp4" />
-      </video>
+      <iframe
+        src="https://www.youtube.com/embed/IZ9CtcboR5g?autoplay=1&mute=1&loop=1&playlist=IZ9CtcboR5g"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+
       <div class="danmu" id="danmu-layer"></div>
       <div class="danmu-input">
         <input type="text" id="danmuInput" placeholder="Send a danmu comment or emoji...">
@@ -152,28 +136,10 @@
       </div>
     </div>
   </div>
-  <script>
-    const video = document.getElementById('livestream');
-    video.volume = 1.0;
-    video.addEventListener('loadedmetadata', function () {
-      const randomStart = Math.floor(Math.random() * video.duration);
-      video.currentTime = randomStart;
-      video.play();
-    });
 
+  <script>
     const danmuLayer = document.getElementById('danmu-layer');
-    const danmuMessages = [
-      "You're amazing! 💖",
-      "Love this story!",
-      "👏👏👏",
-      "Such talent!",
-      "Inspiring! ✨",
-      "Never give up!",
-      "True ability shines!",
-      "Tears in my eyes 😢",
-      "We need more films like this!",
-      "🔥🔥🔥"
-    ];
+    const danmuMessages = ["You're amazing! 💖","Love this story!","👏👏👏","Such talent!","Inspiring! ✨","Never give up!","True ability shines!","Tears in my eyes 😢","We need more films like this!","🔥🔥🔥"];
 
     function launchDanmu(text) {
       const span = document.createElement('span');
@@ -211,17 +177,8 @@
       }
     }
 
-    document.getElementById('danmuInput').addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
-                sendDanmu();
-        }
-     });
-
-    document.getElementById('msgInput').addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
-                sendChat();
-        }
-    });
+    document.getElementById('danmuInput').addEventListener('keydown', e => e.key === 'Enter' && sendDanmu());
+    document.getElementById('msgInput').addEventListener('keydown', e => e.key === 'Enter' && sendChat());
   </script>
 </body>
 </html>
